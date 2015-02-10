@@ -8,7 +8,6 @@ import (
 type Conf struct {
 	Path           []string       `path`
 	EMSServer      []string       `ems_servers`
-	Pattern        string         `pattern`
 	Named          map[string]int `named`
 	LocationDB     string         `location_db`
 	MaxPendingSize int64          `max_pending_size`

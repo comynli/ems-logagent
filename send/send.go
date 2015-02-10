@@ -11,7 +11,7 @@ import (
 type Sender struct {
 	tomb.Tomb
 	addrs []string
-	queue chan common.TraceItem
+	queue chan common.LogItem
 }
 
 func (s *Sender) send() error {
@@ -42,7 +42,7 @@ func (s *Sender) Stop() error {
 	return s.Wait()
 }
 
-func New(addresses []string, queue chan common.TraceItem) *Sender {
+func New(addresses []string, queue chan common.LogItem) *Sender {
 	s := &Sender{addrs: addresses, queue: queue}
 	s.Go(s.send)
 	return s

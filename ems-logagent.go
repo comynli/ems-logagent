@@ -21,7 +21,7 @@ func init() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	conf, err = config.Load((filepath.Join(dir, "ems.yml")))
+	conf, err = config.Load((filepath.Join(dir, "ems-logagent.yml")))
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -36,9 +36,9 @@ func main() {
 		log.Fatalln(err)
 	}
 	originQueue := make(chan string)
-	traceItemQueue := make(chan common.TraceItem)
+	traceItemQueue := make(chan common.LogItem)
 	sender := send.New(conf.EMSServer, traceItemQueue)
-	extractor := extract.New(conf.Pattern, conf.Named, originQueue, traceItemQueue)
+	extractor := extract.New(conf.Named, originQueue, traceItemQueue)
 	tailers := []*tailer.Tailer{}
 	for _, path := range conf.Path {
 		t, err := tailer.New(path, originQueue, ls, conf.MaxPendingSize)
