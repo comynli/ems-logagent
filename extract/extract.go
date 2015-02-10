@@ -47,7 +47,8 @@ func (e *Extractor) buildLogItem(line string) (common.LogItem, error) {
 	}
 
 	if len(raw) > e.named["status"] {
-		status, err := strconv.ParseInt(raw[e.named["status"]], 10, 32)
+		tmp := strings.Split(raw[e.named["status"]], " ")
+		status, err := strconv.ParseInt(tmp[0], 10, 32)
 		if err != nil {
 			return li, err
 		}
