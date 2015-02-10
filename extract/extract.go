@@ -62,7 +62,7 @@ func (e *Extractor) buildLogItem(line string) (common.LogItem, error) {
 		if err != nil {
 			return li, err
 		}
-		li.RT = int64(rt)
+		li.RT = int64(rt * 1000)
 	} else {
 		return li, errors.New("no rt")
 	}
